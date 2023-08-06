@@ -1,0 +1,7 @@
+// slow build during dev is caused from:
+// https://github.com/nuxt/nuxt/issues/15412
+// we need to subscribe this issue
+
+@use "vuetify/settings" with (
+  $body-font-family: "Vazirmatn"
+);
