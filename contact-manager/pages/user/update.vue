@@ -30,7 +30,7 @@
         </p>
         <p class="border-b-solid border-b-[#ddd] border-b-[1px] py-3">
           <v-text-field
-            v-mode="defaultUser.email"
+            v-model="defaultUser.email"
             variant="outlined"
             class="text-[#666]"
             placeholder="email"
