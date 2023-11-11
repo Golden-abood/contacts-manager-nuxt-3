@@ -1,20 +1,25 @@
 <template>
   <v-container class="mt-4">
-    <div class="d-flex items-center gap-x-3">
-      <div class="text-primary text-h4">Contact manager</div>
+    <div class="d-flex justify-between items-center gap-x-3">
+      <div class="text-primary text-3xl font-bold">Contact manager</div>
+      <v-btn
+        color="primary"
+        class="!capitalize"
+        @click="$router.push('/user/create')"
+      >
+        add user</v-btn
+      >
     </div>
-    <p class="mt-6 font-semibold text-base text-[#666] italic">
+    <p class="mt-6 font-semibold text-xl text-[#666] italic text-center">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique ex
       veritatis magni quidem odit at officiis quis, fuga consequatur nulla
       aliquam cum sapiente iste, nobis recusandae vitae labore vel optio.
     </p>
-    <v-btn @click="router.push('./users')">Go </v-btn>
+
+    <users />
   </v-container>
 </template>
 
-<script setup>
-const router = useRouter();
-const route = useRoute();
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>

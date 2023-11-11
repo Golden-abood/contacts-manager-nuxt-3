@@ -18,6 +18,7 @@
     "@pinia/nuxt": "^0.4.11",
     "@unocss/nuxt": "^0.54.0",
     "@vue/composition-api": "^1.7.1",
+    "json-server": "^0.17.4",
     "pinia": "^2.1.6",
     "sass": "^1.64.1",
     "vite-plugin-vuetify": "^1.0.2",

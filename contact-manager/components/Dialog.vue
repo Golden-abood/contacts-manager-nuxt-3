@@ -1,21 +1,13 @@
 <template>
-  <v-dialog
-    :model-value="true"
-    persistent
-    scroll-strategy="reposition"
-    width="600"
-  >
+  <v-dialog persistent scroll-strategy="reposition" width="600">
     <v-card class="pb-6">
       <div class="flex justify-between m-3">
-        <v-card-title>Create New User</v-card-title>
-        <v-btn
-          rounded
-          class="m-2 max-w-[10px]"
-          color="primary"
-          size="small"
-          @click="$router.replace('/')"
-          ><v-icon size="small">mdi-close</v-icon>
-        </v-btn>
+        <v-card-title class="!font-bold !text-2xl"
+          >Create New User</v-card-title
+        >
+        <v-icon size="large" class="bg-primary p-5 rounded-full"
+          >mdi-close
+        </v-icon>
       </div>
       <v-card-text>
         <form>
@@ -69,20 +61,17 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { useUserStore } from "../../stores/user";
+import { useUserStore } from "~/stores/user.ts";
 const userStore = useUserStore();
 const { users } = storeToRefs(userStore);
-const user = ref({
+const user = {
   name: ref(""),
-  mobilePhone: ref(""),
   email: ref(""),
+  mobilePhone: ref(""),
   photo: ref([]),
-});
-console.log(user.value.mobilePhone);
-const createUser = () => {
-  console.log(users.value);
-  console.log(user.value);
 };
+
+defineEmits(["closeDialog"]);
 </script>
 
 <style scoped></style>
