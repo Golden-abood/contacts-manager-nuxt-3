@@ -2,7 +2,6 @@
   <div>
     <div class="flex lg:w-[50%] mt-5 gap-x-10 items-center">
       <v-text-field v-model="search" class="w-10" variant="outlined" clearable>
-        {{ search }}
       </v-text-field>
 
       <v-btn
@@ -71,7 +70,7 @@ const { pending } = useLazyAsyncData(() => userStore.list());
 const search = ref("");
 const userSearch = () => {
   users.value.filter((st) => {
-    st.name.match(search.value);
+    useLazyAsyncData(() => userStore.userFilter(search.value));
   });
 };
 const updateFunction = async (id: number) => {

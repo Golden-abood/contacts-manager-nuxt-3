@@ -17,6 +17,13 @@ export const useUserStore = defineStore("user", () => {
     const data = await res.json();
     users.value = data;
   };
+  const userFilter = async (title: String) => {
+    const res = await fetch(`http://localhost:3000/users?${title}`);
+    const data = await res.json();
+    users.value.filter((st) => {
+      st.name.match(title);
+    });
+  };
 
   const getUser = async (id: number) => {
     const res = await fetch(`http://localhost:3000/users/${id}`);
@@ -63,14 +70,27 @@ export const useUserStore = defineStore("user", () => {
     users.value = users.value;
     list();
   };
+  const reset = () => {
+    defaultUser.value = {
+      name: "",
+      mobilePhone: "",
+      title: "",
+      company: "",
+      email: "",
+      photo: "",
+      group: "",
+    };
+  };
 
   return {
     users,
     defaultUser,
     list,
+    userFilter,
     getUser,
     deleteUser,
     updateUser,
     createUser,
+    reset,
   };
 });

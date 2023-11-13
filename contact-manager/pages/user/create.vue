@@ -8,10 +8,11 @@
     </p>
 
     <div
-      class="flex flex-col lg:flex-row items-center gap-4 justify-around p-5 mt-16 rounded-md"
+      class="flex flex-col lg:flex-row items-start gap-4 justify-around p-5 mt-16 rounded-md"
     >
-      <div class="bg-white py-4 px-10 w-[90%] lg:w-[50%] rounded-sm">
-        <p class="border-b-solid border-b-[#ddd] border-b-[1px] py-3">
+      <div class="bg-white py-4 px-10 w-[90%] lg:w-[50%] rounded-xl">
+        <p class="pt-4">
+          <v-label class="mb-2"> Name </v-label>
           <v-text-field
             v-model="defaultUser.name"
             variant="outlined"
@@ -19,7 +20,9 @@
             placeholder="Name"
           ></v-text-field>
         </p>
-        <p class="border-b-solid border-b-[#ddd] border-b-[1px] py-3">
+        <p class="py-3">
+          <v-label class="mb-2"> mobile Phone </v-label>
+
           <v-text-field
             v-model="defaultUser.mobilePhone"
             variant="outlined"
@@ -28,7 +31,9 @@
           >
           </v-text-field>
         </p>
-        <p class="border-b-solid border-b-[#ddd] border-b-[1px] py-3">
+        <p class="py-3">
+          <v-label class="mb-2"> Email </v-label>
+
           <v-text-field
             v-model="defaultUser.email"
             variant="outlined"
@@ -36,7 +41,8 @@
             placeholder="email"
           ></v-text-field>
         </p>
-        <p class="border-b-solid border-b-[#ddd] border-b-[1px] py-3">
+        <p class="py-3">
+          <v-label class="mb-2"> Company </v-label>
           <v-text-field
             v-model="defaultUser.company"
             variant="outlined"
@@ -44,7 +50,9 @@
             placeholder="company"
           ></v-text-field>
         </p>
-        <p class="border-b-solid border-b-[#ddd] border-b-[1px] py-3">
+        <p class="py-3">
+          <v-label class="mb-2"> title </v-label>
+
           <v-text-field
             v-model="defaultUser.title"
             variant="outlined"
@@ -53,6 +61,8 @@
           ></v-text-field>
         </p>
         <p class="py-3">
+          <v-label class="mb-2"> group </v-label>
+
           <v-text-field
             v-model="defaultUser.group"
             variant="outlined"
@@ -61,16 +71,22 @@
           ></v-text-field>
         </p>
       </div>
-      <div class="flex-col text-center md:!text-start">
-        <v-text-field
-          v-model="defaultUser.photo"
-          type="file"
-          class="h-96"
-          variant="outlined"
-        ></v-text-field>
+      <div class="flex-col text-center items-center md:!text-start w-[40%]">
+        <div class="md:flex items-center">
+          <img
+            :src="defaultUser.photo"
+            class="w-[100%] block mx-auto rounded-lg md:w-[20%]"
+          />
+          <v-file-input
+            v-model:model-value="img"
+            @update:model-value="renderImg()"
+            variant="outlined"
+            class="w-80"
+          ></v-file-input>
+        </div>
         <v-btn
           color="primary"
-          class="!font-bold !hidden !md:block mx-20 mt-4"
+          class="!font-bold !hidden !md:block fixed top-40 text-center left-58"
           @click="createuser()"
         >
           Create
@@ -86,11 +102,24 @@ import { useUserStore } from "~/stores/user";
 
 const userStore = useUserStore();
 const { defaultUser } = storeToRefs(userStore);
+const img = ref();
+
+await userStore.reset();
 
 const createuser = async () => {
   await userStore.createUser();
   userStore.list();
 };
+
+const renderImg = computed(() => {
+  if (!img.value[0]) return;
+  const file = img.value[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.addEventListener("load", () => {
+    defaultUser.value.photo = reader.result;
+  });
+});
 </script>
 
 <style scoped></style>

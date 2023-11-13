@@ -64,11 +64,11 @@
       <div class="flex-col text-center md:!text-start">
         <img
           :src="defaultUser.photo"
-          class="max-w-[50%] rounded-full !mx-auto"
+          class="max-w-[50%] rounded-full !mx-auto hidden md:block"
         />
         <v-btn
           color="primary"
-          class="!font-bold !hidden !md:block mx-20 mt-16"
+          class="!font-bold !block mx-auto mt-16"
           @click="userStore.updateUser(query)"
         >
           Update
