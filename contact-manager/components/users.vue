@@ -1,8 +1,16 @@
 <template>
   <div>
     <div class="flex lg:w-[50%] mt-5 gap-x-10 items-center">
-      <v-text-field v-model="search" class="w-10" variant="outlined" clearable>
-      </v-text-field>
+      <v-text-field
+        v-model="search"
+        prepend-inner-icon="mdi-magnify"
+        density="compact"
+        label="Search"
+        single-line
+        flat
+        hide-details
+        variant="solo-filled"
+      ></v-text-field>
 
       <v-btn
         class="align-middle"
@@ -15,6 +23,7 @@
       class="grid grid-cols-1 lg:grid-cols-2 pt-[20px] pb-[100px] gap-[50px]"
     >
       <div
+        :items="users"
         v-for="(user, index) in users"
         class="bg-light flex flex-col lg:flex-row items-center gap-4 justify-around p-5 rounded-md"
       >
@@ -59,6 +68,7 @@
       </div>
     </div>
   </div>
+  <snack-bar />
 </template>
 
 <script setup lang="ts">
